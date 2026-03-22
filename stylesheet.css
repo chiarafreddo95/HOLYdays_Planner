@@ -1,0 +1,103 @@
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+    padding: 0;
+    margin: 0;
+}
+
+
+html {
+    box-sizing: border-box;
+
+}
+
+
+.img-bg {
+
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: rgb(255, 255, 255);
+}
+
+.img-bg img {
+
+    /* Taglia l'immagine per coprire l'area senza deformarsi */
+    object-fit: cover;
+    object-position: center;
+    filter: blur(20px) brightness(1.2);
+    opacity: 80%;
+    /* Fondamentale per far funzionare object-fit */
+    width: 100%;
+    height: 100%;
+
+    /* Taglia l'immagine per coprire l'area senza deformarsi */
+    object-fit: cover;
+    object-position: center;
+}
+
+
+/* Contenitore generale delle spese */
+.spese {
+    position: absolute;
+    /* Posizionamento in basso a sinistra */
+    bottom: 40px;
+    left: 40px;
+
+    /* Layout verticale: Totale sopra, Icone sotto */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Allinea tutto a sinistra */
+    gap: 1.5rem;
+    z-index: 100;
+}
+
+/* Lo stile del totale in alto */
+.header-totale {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    /* Effetto pillola */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+#risultato-totale {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Allineiamo le icone in riga da sinistra a destra */
+.grid-icone {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+/* Il pulsante Caffè (e i futuri pulsanti) */
+div.coffee-button {
+    background-color: rgba(255, 255, 255, 0.7);
+    width: 70px;
+    /* Larghezza fissa */
+    height: 70px;
+    /* Altezza uguale per farlo quadrato */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1.2rem;
+    /* Leggermente arrotondato ma quadrato */
+    border: 2px solid white;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+div.coffee-button:hover {
+    transform: scale(1.1);
+    background-color: white;
+}
