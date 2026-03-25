@@ -2,102 +2,326 @@
 *::before,
 *::after {
     box-sizing: inherit;
-    padding: 0;
-    margin: 0;
 }
+
+/* famiglia lato, inter, playfair, roboto, Crimson text*/
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 
 
 html {
     box-sizing: border-box;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    /* lato, inter e playfair display */
+    font-family: "Lato", sans-serif;
 
 }
 
 
-.img-bg {
+/* PADRE bg-overlay contenitore con FIGLI .overlay e div.ing-bg immagine di sfondo*/
 
+.bg-overlay {
+    overflow: hidden;
+    /*!-- assicura che non strabordi i contenuto al di fuori (es. angoli arrotondati) -->*/
+    display: flex;
+    justify-content: center;
+    /*centra i suoi contenuti orizzontalmente*/
+    align-items: center;
     width: 100%;
     height: 100vh;
+}
+
+/* FIGLIO overlay VUOTO con BLUR GLASSMORPHISM */
+.overlay {
+
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(15px);
+    background-color: rgba(255, 255, 255, 0.523);
+    opacity: 100%;
+    position: absolute;
+    z-index: 10;
+}
+
+
+/* div contenitore VUOTO per immagine sfondo */
+div.img-bg {
+
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-    background-color: rgb(255, 255, 255);
 }
+
+/* IMMAGINE DEL MESE */
 
 .img-bg img {
 
+    filter: brightness(1.3);
     /* Taglia l'immagine per coprire l'area senza deformarsi */
     object-fit: cover;
     object-position: center;
-    filter: blur(20px) brightness(1.2);
-    opacity: 80%;
     /* Fondamentale per far funzionare object-fit */
     width: 100%;
     height: 100%;
-
-    /* Taglia l'immagine per coprire l'area senza deformarsi */
-    object-fit: cover;
-    object-position: center;
+    position: absolute;
+    z-index: 1;
 }
 
-
-/* Contenitore generale delle spese */
-.spese {
-    position: absolute;
-    /* Posizionamento in basso a sinistra */
-    bottom: 40px;
-    left: 40px;
-
-    /* Layout verticale: Totale sopra, Icone sotto */
+/* section.countdown_blocco contiene titolo e pannelli countdown */
+section.countdown-blocco {
+    top: 30px;
+    width: 85vw;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
+    gap: .6rem;
     flex-direction: column;
+    justify-content: flex-start;
     align-items: flex-start;
-    /* Allinea tutto a sinistra */
-    gap: 1.5rem;
+    position: absolute;
     z-index: 100;
 }
 
-/* Lo stile del totale in alto */
-.header-totale {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 1rem 2rem;
-    border-radius: 50px;
-    /* Effetto pillola */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+p.titolo-rovescia {
+    margin: 0;
+    font-family: "Lora", serif;
+    font-style: italic;
+    font-size: 1rem;
+    font-weight: 700;
+    z-index: 100;
 }
 
-#risultato-totale {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-}
+/* contenitore countdowns */
+section.countdowns {
 
-/* Allineiamo le icone in riga da sinistra a destra */
-.grid-icone {
+    width: 16rem;
     display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: flex-start;
+    gap: 0.6rem;
+    z-index: 20;
+
 }
 
-/* Il pulsante Caffè (e i futuri pulsanti) */
-div.coffee-button {
-    background-color: rgba(255, 255, 255, 0.7);
-    width: 70px;
+/* riquadri natale e pasqua flexati */
+div.countdown {
+    flex-grow: 1;
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.609);
+    width: 4rem;
+    box-shadow: 2px 4px 10px rgba(160, 160, 160, 0.564);
     /* Larghezza fissa */
-    height: 70px;
-    /* Altezza uguale per farlo quadrato */
     display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 1.2rem;
+    flex-direction: column;
+    justify-content: flex-start;
+    /*centrato gli svg interni in orizzontale*/
+    align-items: flex-start;
+    /*centrato gli svg interni in verticale*/
+    border-radius: 0.8rem;
     /* Leggermente arrotondato ma quadrato */
     border: 2px solid white;
     cursor: pointer;
     transition: transform 0.2s, background-color 0.2s;
 }
 
-div.coffee-button:hover {
-    transform: scale(1.1);
+/* testi countdowns */
+p.countdown-giorni {
+    margin: 0 0 8px 0;
+    padding: 0.2rem 0.5rem;
+    font-size: 1rem;
+    font-weight: regular;
+    color: #333;
+    justify-content: center;
+    align-items: center;
+}
+
+p.countdown-titolo {
+    padding: 0.2rem 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 8px 0 0 0;
+}
+
+/* BOX NOTE E SPESE USA IL FLEX SUI SUOI FIGLI SECTION SPESE E SECTION NOTE*/
+section.footer-spese-e-note {
+    box-shadow: 2px 4px 10px rgba(103, 103, 103, 0.576);
+    width: 90vw;
+    height: auto;
+    position: absolute;
+    z-index: 300;
+    /* Posizionamento in basso a sinistra */
+    bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.351);
+    /* trucco per centrare perfettamente un elemento in position absolute */
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 20px;
+    border: 2px solid white;
+    /* flex che dispone la sezione spese e la sezione note space-around */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 2vw;
+
+
+}
+
+/* Contenitore generale delle spese flex verticale: totale spese e sotto i pulsanti BTN */
+section.spese {
+    /* background-color: rgba(255, 255, 255, 0.668); */
+
+    /* Posizionamento in basso a sinistra */
+    top: 15px;
+    left: 15px;
+
+    /* Layout verticale: Totale sopra, Icone sotto */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /*allineati a sinistra*/
+    z-index: 20;
+    gap: 0.5rem;
+    /*stanno sopra per essere cliccabili*/
+}
+
+/* Lo stile del totale in alto */
+.header-totale {
+    /* Effetto pillola */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* testo SPESE E NOTE */
+.titolo-spese {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+#risultato-totale {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: regular;
+    color: #333;
+}
+
+/* contenitore di TUTTI i BTN flexati orizzontale*/
+div.btn-spese {
+    display: flex;
+    gap: 0.5rem;
+    /*spazio tra i BTN*/
+}
+
+
+
+/* il .BTN modifica TUTTI i bottoni insieme */
+.btn {
+
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.668);
+    width: 2rem;
+    /* Larghezza fissa */
+    height: 2rem;
+    /* Altezza uguale per farlo quadrato */
+    display: flex;
+    justify-content: center;
+    /*centrato gli svg interni in orizzontale*/
+    align-items: center;
+    /*centrato gli svg interni in verticale*/
+    border-radius: 0.8rem;
+    /* Leggermente arrotondato ma quadrato */
+    border: 2px solid white;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+/* controllo delle dimensioni SVG sovrascritte dall'index */
+.btn-svg {
+
+    width: 20px;
+    height: 20px;
+}
+
+
+/* all'hover si ingrandisce e lo sfondo diventa chiaro */
+div.btn:hover {
+    transform: scale(1.2);
     background-color: white;
+
+}
+
+/* sezione note */
+section.note {
+    top: -50;
+    left: 15px;
+}
+
+p.note-titolo {
+
+    margin-top: 0;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+
+}
+
+
+
+
+/* le note input hanno un padding con sfondo */
+p#note-input {
+    font-size: 1rem;
+    font-weight: light;
+    font-family: "Lora", serif;
+    font-style: italic;
+    font-weight: 400;
+    color: rgb(87, 87, 87);
+    letter-spacing: 2;
+    background-color: rgba(255, 255, 255, 0.668);
+    padding: 0.5rem 2.5vw;
+    border-radius: 0.8rem;
+    box-shadow: 2px 6px 10px rgba(160, 160, 160, 0.564);
+    border: solid 2px rgb(255, 255, 255);
+    /* RENDERE CHIARO CHE è editabile con la MANINA cursor:pointer */
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+
+
+}
+
+p#note-input:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+
+/* Effetto quando l'utente sta scrivendo (Focus) */
+p#note-input:focus {
+    background-color: rgba(255, 255, 255, 0.9);
+    /* Diventa più opaco */
+
+    box-shadow: 0 0 15px rgba(255, 196, 0, 0.3);
+    /* Un leggero bagliore */
+
+    height: auto;
+    /* Si espande solo quando scrivi */
+    min-height: 65px;
+    max-height: 200px;
+    /* Limite per non coprire tutto */
+    overflow-y: auto;
+    /* Se scrivi poemi, appare la scrollbar interna */
+
+}
+
+p#note-input:empty::before {
+    content: "Scrivi qui la tua nota...";
+    color: rgb(181, 181, 181);
 }
