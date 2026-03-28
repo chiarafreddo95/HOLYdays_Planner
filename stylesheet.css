@@ -97,7 +97,6 @@ div.img-bg {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    border: 2px solid white;
     /* Posizionamento assoluto per stare sopra il BG */
     position: relative;
     /* Si muove con lo scroll */
