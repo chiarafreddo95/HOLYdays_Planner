@@ -9,19 +9,19 @@
 
 html,
 body {
-    height: 100%;
-    height: 100dvh;
+    height: auto;
+    min-height: 100dvh;
     /*anche qui dvh invece di solo vh per impedire spazi bianchi sopra e sotto*/
+    overflow-y: auto;
+    /* Riattiva lo scroll verticale */
+    overflow-x: hidden;
+    /* Evita scivolamenti laterali */
     margin: 0;
     padding: 0;
-    overflow: hidden;
     /* Impedisce lo scroll "rimbalzino" di iOS */
-    position: fixed;
-    /* Blocca la pagina al centro dello schermo BLOCCA LO SCROLL */
     width: 100%;
-    overscroll-behavior: none;
-    /* Aggiungi questo per bloccare il "tiro" su iOS */
 }
+
 
 html {
     box-sizing: border-box;
@@ -36,6 +36,8 @@ body {
 /* PADRE bg-overlay contenitore con FIGLI .overlay e div.ing-bg immagine di sfondo*/
 
 .bg-overlay {
+    top: 0;
+    left: 0;
     overflow: hidden;
     /*!-- assicura che non strabordi i contenuto al di fuori (es. angoli arrotondati) -->*/
     display: flex;
@@ -45,7 +47,7 @@ body {
     width: 100%;
     height: 100dvh;
     /*dvh invece di vh per browser nuovi per TOGLIERE spazi extra bianchi*/
-    position: relative;
+    position: fixed;
     /*posizione relativa per non far sballare i figli absolute*/
 }
 
@@ -90,28 +92,54 @@ div.img-bg {
     z-index: 1;
 }
 
+/* Il contenitore main che dispone le 3 sezioni */
+.main-flex {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    border: 2px solid white;
+    /* Posizionamento assoluto per stare sopra il BG */
+    position: relative;
+    /* Si muove con lo scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    min-height: 100dvh;
+    /* Copre tutta l'altezza dello schermo */
+    padding: 40px 5vw;
+    /* Più respiro sopra e sotto */
+    z-index: 100;
+}
+
 /* section.countdown_blocco contiene titolo e pannelli countdown */
 section.countdown-blocco {
-    top: 30px;
+
     width: 85vw;
-    left: 50%;
-    transform: translateX(-50%);
     display: flex;
     gap: .6rem;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    position: absolute;
     z-index: 100;
 }
 
 p.titolo-rovescia {
+
+    color: rgb(0, 0, 0);
+    /* color: rgb(255, 255, 255); */
+    font-weight: 400;
+    padding: 0.1em;
+    background-color: rgba(255, 255, 255, 0.66);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+    padding: 10px 20px;
+    border-radius: 2rem;
     margin: 0;
     font-family: "Lora", serif;
     font-style: italic;
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 1.25rem;
     z-index: 100;
+    box-shadow: 2px 4px 10px rgba(160, 160, 160, 0.564);
 }
 
 /* contenitore countdowns */
@@ -150,7 +178,6 @@ p.countdown-giorni {
     margin: 0 0 8px 0;
     padding: 0.2rem 0.5rem;
     font-size: 1rem;
-    font-weight: regular;
     color: #333;
     justify-content: center;
     align-items: center;
@@ -163,19 +190,122 @@ p.countdown-titolo {
     margin: 8px 0 0 0;
 }
 
+
+/* SEZIONE PIANTE E SANTI */
+
+section.piante-e-santi {
+    box-shadow: 2px 4px 10px rgba(103, 103, 103, 0.576);
+    background-color: rgba(255, 255, 255, 0.351);
+    padding: 0 2vw;
+    flex-grow: 0;
+    /* Non forziamo più la crescita per riempire lo schermo */
+    display: flex;
+    flex-wrap: wrap;
+    /* Se lo schermo è troppo stretto, i pannelli vanno uno sotto l'altro */
+    gap: 1rem;
+    height: auto;
+    /* Diventa alta quanto i figli */
+    width: 90vw;
+
+    border-radius: 20px;
+    border: 2px solid white;
+
+
+    z-index: 100;
+}
+
+/* Controlla entrambi i pannelli piante e santi */
+div.pannello {
+    height: auto;
+    padding: 1rem 0;
+    /* background-color: rgba(255, 255, 255, 0.351); */
+    flex: 1;
+    /* border: 2px solid white; */
+    margin-bottom: 1rem;
+    border-radius: 0.8rem;
+    gap: 0.8rem;
+    /* Spazio costante tra immagine, titolo e motto */
+    padding: 1rem 0;
+    margin-bottom: 0;
+    /* Rimuoviamo il margin che sballa i calcoli */
+}
+
+/* div sia piante sia santi che contiene l'immagine corrispondente */
+div.pannello-img-container {
+    height: 200px;
+    display: flex;
+    flex-shrink: 0;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 1rem;
+    border-radius: 0.8rem;
+    background-color: rgba(255, 255, 255, 0.511);
+    box-shadow: 2px 4px 10px rgba(103, 103, 103, 0.576);
+}
+
+img.piante-e-santi-img {
+    position: center;
+    height: 100%;
+    width: 100%;
+    object-position: center;
+    object-fit: contain;
+}
+
+.pannello-titolo,
+.pannello-motto {
+    color: rgb(0, 0, 0);
+    /* color: rgb(255, 255, 255); */
+    font-weight: 400;
+
+    border-radius: 2rem;
+    font-family: "Lora", serif;
+    font-style: italic;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    text-align: center;
+    /* Opzionale: rende tutto più armonioso */
+
+    /* TRUCCO DA MANAGER: Altezza minima per pareggiare le righe */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pannello-titolo {
+    padding: 0.8rem;
+    min-height: 4.5rem;
+    /* Se un titolo va su due righe, l'altro resta allineato */
+    background-color: rgba(255, 255, 255, 0.668);
+    box-shadow: 2px 4px 10px rgba(103, 103, 103, 0.576);
+}
+
+.pannello-motto {
+    font-size: 1rem;
+    font-family: "Inter", sans-serif;
+    text-shadow: none;
+    color: #333;
+    min-height: 5rem;
+    /* Spazio sufficiente per motti bilingue più lunghi */
+    flex-grow: 1;
+    /* Fa sì che il motto occupi tutto lo spazio rimanente in basso */
+    margin: 0;
+}
+
 /* BOX NOTE E SPESE USA IL FLEX SUI SUOI FIGLI SECTION SPESE E SECTION NOTE*/
 section.footer-spese-e-note {
     box-shadow: 2px 4px 10px rgba(103, 103, 103, 0.576);
+    background-color: rgba(255, 255, 255, 0.351);
     width: 90vw;
     height: auto;
-    position: absolute;
+
     z-index: 300;
     /* Posizionamento in basso a sinistra */
-    bottom: 20px;
-    background-color: rgba(255, 255, 255, 0.351);
+
+
     /* trucco per centrare perfettamente un elemento in position absolute */
-    left: 50%;
-    transform: translateX(-50%);
+
     border-radius: 20px;
     border: 2px solid white;
     /* flex che dispone la sezione spese e la sezione note space-around */
@@ -223,7 +353,6 @@ section.spese {
 #risultato-totale {
     margin: 0;
     font-size: 1rem;
-    font-weight: regular;
     color: #333;
 }
 
@@ -293,7 +422,6 @@ p.note-titolo {
 /* le note input hanno un padding con sfondo */
 p#note-input {
     font-size: 1rem;
-    font-weight: light;
     font-family: "Lora", serif;
     font-style: italic;
     font-weight: 400;
