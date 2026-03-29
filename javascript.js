@@ -1,113 +1,86 @@
-'use strict'
+'use strict';
 
-// calcolo giorni rimanenti a Pasqua
-
-
-function getEaster(year) {
-    const a = year % 19;
-    const b = Math.floor(year / 100);
-    const c = year % 100;
-    const d = Math.floor(b / 4);
-    const e = b % 4;
-    const f = Math.floor((b + 8) / 25);
-    const g = Math.floor((b - f + 1) / 3);
-    const h = (19 * a + b - d - g + 15) % 30;
-    const i = Math.floor(c / 4);
-    const k = c % 4;
-    const l = (32 + 2 * e + 2 * i - h - k) % 7;
-    const m = Math.floor((a + 11 * h + 22 * l) / 451);
-    const month = Math.floor((h + l - 7 * m + 114) / 31); // 3 = Marzo, 4 = Aprile
-    const day = ((h + l - 7 * m + 114) % 31) + 1;
-
-    return new Date(year, month - 1, day);
-}
-
-
-function daysUntilEaster() {
+// 1. CALCOLO PASQUA E NATALE (Semplificato)
+function aggiornaCountdowns() {
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Reset orario per precisione
+    today.setHours(0, 0, 0, 0);
 
-    let year = today.getFullYear();
-    let easter = getEaster(year);
+    const getDays = (target) => Math.ceil((target - today) / (1000 * 60 * 60 * 24));
 
-    // Se la Pasqua di quest'anno è già passata, calcoliamo quella dell'anno prossimo
-    if (today > easter) {
-        easter = getEaster(year + 1);
-    }
+    // Natale
+    let natale = new Date(today.getFullYear(), 11, 25);
+    if (today > natale) natale = new Date(today.getFullYear() + 1, 11, 25);
+    document.getElementById('Natale').textContent = `( ${getDays(natale)} )`;
 
-    const diffInMs = easter - today;
-    const diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
-
-    return diffInDays;
+    // Pasqua (Algoritmo rapido)
+    const f = Math.floor, y = today.getFullYear(), a = y % 19, b = f(y / 100), c = y % 100,
+        d = f(b / 4), e = b % 4, g = f((8 * b + 13) / 25), h = (19 * a + b - d - g + 15) % 30,
+        i = f(c / 4), k = c % 4, l = (32 + 2 * e + 2 * i - h - k) % 7,
+        m = f((a + 11 * h + 22 * l) / 451), month = f((h + l - 7 * m + 114) / 31),
+        day = ((h + l - 7 * m + 114) % 31) + 1;
+    let pasqua = new Date(y, month - 1, day);
+    if (today > pasqua) /* ricalcolo opzionale per anno dopo */ pasqua = new Date(y + 1, month - 1, day);
+    document.getElementById('Pasqua').textContent = `( ${getDays(pasqua)} )`;
 }
 
-function aggiornaContatorePasqua() {
-    const elementoPasqua = document.getElementById('Pasqua');
-
-    if (elementoPasqua) {
-        const numeroGiorni = daysUntilEaster();
-
-        // Usiamo i backtick ` e la sintassi ${} per inserire le parentesi
-        elementoPasqua.textContent = `(${numeroGiorni})`;
-    }
-}
-
-
-
-// calcolo giorni rimanenti a Natale
-
-function daysUntilChristmas() {
-    const oggi = new Date();
-    oggi.setHours(0, 0, 0, 0); // Reset dell'ora per un calcolo preciso dei giorni
-
-    let annoCorrente = oggi.getFullYear();
-    // In JS i mesi partono da 0 (0=Gennaio, 11=Dicembre)
-    let natale = new Date(annoCorrente, 11, 25);
-
-    // Se il Natale di quest'anno è già passato, calcola quello dell'anno prossimo
-    if (oggi > natale) {
-        natale = new Date(annoCorrente + 1, 11, 25);
-    }
-
-    const differenzaMs = natale - oggi;
-    const giorniMancanti = Math.ceil(differenzaMs / (1000 * 60 * 60 * 24));
-
-    return giorniMancanti;
-}
-
-function mostraNatale() {
-    const elemento = document.getElementById('Natale');
-    if (elemento) {
-        const giorni = daysUntilChristmas();
-        // Inserisce il numero tra parentesi tonde: (X)
-        elemento.textContent = `(${giorni})`;
-    }
-}
-
-// Avvia la funzione al caricamento della pagina
-document.addEventListener('DOMContentLoaded', () => {
-    aggiornaContatorePasqua();
-    mostraNatale();
-});
-
-
-// BOX NOTE
+// 2. GESTIONE NOTE (Logica a 3 righe via JS)
 const noteBox = document.getElementById('note-input');
-let testoReale = noteBox.innerText; // Memorizza il contenuto vero
+const oggi = new Date().toISOString().split('T')[0];
+const chiave = `3DWarrior_Nota_${oggi}`;
+const LIMITE = 180; // Numero di caratteri che circa riempiono 3 righe
 
-// Quando clicchi per scrivere
-noteBox.addEventListener('focus', () => {
-    noteBox.innerText = testoReale; // Mostra tutto il testo originale
+// Carica
+window.addEventListener('DOMContentLoaded', () => {
+    aggiornaCountdowns();
+    const salvata = localStorage.getItem(chiave);
+    if (salvata) {
+        // Se è lunga, mostra l'anteprima troncata
+        noteBox.innerText = salvata.length > LIMITE ? salvata.substring(0, LIMITE) + "..." : salvata;
+    }
 });
 
-// Quando clicchi fuori (o premi invio e perdi il focus)
+// Quando clicchi (Focus): mostra tutto per editare
+noteBox.addEventListener('focus', () => {
+    const integrale = localStorage.getItem(chiave) || "";
+    noteBox.innerText = integrale;
+});
+
+// Quando esci (Blur): salva tutto e tronca l'anteprima
 noteBox.addEventListener('blur', () => {
-    testoReale = noteBox.innerText; // Salva quello che hai scritto
+    const testo = noteBox.innerText;
+    localStorage.setItem(chiave, testo); // Salva il testo vero
 
-    const limiteCaratteri = 80; // Regola questo numero per le tue 2 righe di Lora
-
-    if (testoReale.length > limiteCaratteri) {
-        // Taglia il testo e aggiunge i puntini
-        noteBox.innerText = testoReale.substring(0, limiteCaratteri) + "...";
+    if (testo.length > LIMITE) {
+        noteBox.innerText = testo.substring(0, LIMITE) + "...";
     }
+});
+
+// 3. ARCHIVIO
+function mostraArchivio() {
+    const diario = document.getElementById('archivio-diario');
+    const overlay = document.getElementById('archivio-overlay');
+    diario.innerHTML = '<h2>I tuoi frammenti</h2>';
+
+    let note = [];
+    for (let i = 0; i < localStorage.length; i++) {
+        let k = localStorage.key(i);
+        if (k.startsWith("3DWarrior_Nota_")) {
+            note.push({ d: k.replace("3DWarrior_Nota_", ""), t: localStorage.getItem(k) });
+        }
+    }
+
+    note.sort((a, b) => new Date(b.d) - new Date(a.d)).forEach(n => {
+        diario.innerHTML += `<div class="ricordo-item"><strong>${n.d}</strong><p>${n.t}</p></div>`;
+    });
+
+    overlay.style.display = 'block';
+    setTimeout(() => { overlay.classList.add('active'); diario.classList.add('active'); }, 10);
+}
+
+// Chiudi Archivio
+document.getElementById('archivio-overlay').addEventListener('click', () => {
+    const o = document.getElementById('archivio-overlay');
+    const d = document.getElementById('archivio-diario');
+    o.classList.remove('active'); d.classList.remove('active');
+    setTimeout(() => o.style.display = 'none', 400);
 });

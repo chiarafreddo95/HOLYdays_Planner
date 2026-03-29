@@ -49,28 +49,19 @@
 
 
 
-            <!-- sezione piante e santi -->
-            <section class="piante-e-santi">
+            <!-- sezione piante -->
+            <section class="piante">
 
-                <div class="pannello pannello-piante">
-                    <p class="pannello-titolo">Primule</p>
+                <div class="pannello-piante">
+                    <p class="pannello-titolo">~ Primule ~</p>
                     <div class="pannello-img-container">
-                        <img class="piante-e-santi-img" src="img_piante/primule_TG.png" alt="">
+                        <img class="piante-img" src="img_piante/primule_TG.png" alt="">
                     </div>
-
-                    <p class="pannello-motto">"Il coraggio di essere il primo."</p>
-                </div>
-
-
-                <div class="pannello pannello-santi">
-                    <p class="pannello-titolo">Annunciazione del Signore</p>
-                    <div class="pannello-img-container">
-                        <img class="piante-e-santi-img" src="img_santi/annunciazione_TG.png" alt="">
+                    <div class="pannello-motto">
+                        <p class="text-motto">Il&nbsp;<span class="accent-text">coraggio</span>&nbsp;di essere il
+                            primo.</p>
                     </div>
-
-                    <p class="pannello-motto">"Il SÌ che genera il Mondo."</p>
                 </div>
-
             </section>
 
 
@@ -87,7 +78,7 @@
                     <!-- HEADER con totale spese -->
                     <div class="header-totale">
                         <!-- Testo spese e note -->
-                        <p class="titolo-spese">Spese e Note</p>
+                        <p class="titolo-spese">&lt Spese e Note &gt</p>
                         <p id="risultato-totale"> Totale oggi: 0 €</p>
                     </div>
 
@@ -137,18 +128,27 @@
 
                 <!-- sezione note -->
                 <section class="note">
-                    <p class="note-titolo">Note</p>
+
+                    <p class="note-titolo" onclick="mostraArchivio()" style="cursor:pointer;">&lt Note &gt<span
+                            style="font-size: 0.7rem; font-weight: normal;"> (Vedi Archivio)</span></p>
                     <div class="note-riquadro">
                         <!-- p editabile con contenteditable='true' e tetto max 300 caratteri-->
                         <p id="note-input" contenteditable="true"></p>
                     </div>
 
                 </section>
+                <!-- PIANTA DECORO NELL'ANGOLO -->
+                <div id="pianta-giorno-dopo">
+                    <img src="img_piante/magnolia.png" id="giorno-dopo">
+                </div>
             </section>
         </main>
 
-    </section>
 
+
+    </section>
+    <div id="archivio-overlay"></div>
+    <div id="archivio-diario"></div>
 
     <script src="javascript.js"></script>
 </body>

@@ -4,8 +4,8 @@
     box-sizing: inherit;
 }
 
-/* famiglia lato, inter, playfair, roboto, Crimson text*/
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+/* famiglia lato, inter, Playfair Display, Roboto, Crimson text, Dancing Script, Amatic*/
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Dancing+Script:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* 1. Il Guscio Esterno: NON si muove e non mostra il bianco */
 html {
@@ -122,7 +122,7 @@ div.img-bg {
 /* section.countdown_blocco contiene titolo e pannelli countdown */
 section.countdown-blocco {
 
-    width: 85vw;
+    width: 95vw;
     display: flex;
     gap: .6rem;
     flex-direction: column;
@@ -131,22 +131,37 @@ section.countdown-blocco {
     z-index: 100;
 }
 
+/* ! --- TIOLO PAGINA "CONTO ALLA ROVESCIA" --- */
 p.titolo-rovescia {
 
-    color: rgb(0, 0, 0);
-    /* color: rgb(255, 255, 255); */
+    font-family: 'Dancing script', cursive;
+    font-size: 2.5rem;
+    /* Amatic va tenuto grande perché è molto sottile */
     font-weight: 400;
-    padding: 0.1em;
-    background-color: rgba(255, 255, 255, 0.66);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
-    padding: 10px 20px;
+    letter-spacing: 3px;
+    /* Dagli aria! Lo rende molto più elegante */
+    color: #2d4a22af;
+    /* Verde bosco scuro */
+
+    /* Un'ombra leggerissima per farlo "staccare" dal vetro */
+    text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.8);
+    /* color: rgb(255, 255, 255); */
+
+    padding: 5px 10px;
     border-radius: 2rem;
     margin: 0;
-    font-family: "Lora", serif;
-    font-style: italic;
-    font-size: 1.25rem;
     z-index: 100;
-    box-shadow: 2px 4px 10px rgba(160, 160, 160, 0.564);
+}
+
+/* PAROLA CHIAVE DEL MOTTO EVIDENZIATA */
+.accent-text {
+    color: #2d4a22af;
+    /* Verde bosco scuro */
+    font-weight: 800;
+
+    /* Un'ombra leggerissima per farlo "staccare" dal vetro */
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8);
+
 }
 
 /* contenitore countdowns */
@@ -162,8 +177,8 @@ section.countdowns {
 /* riquadri natale e pasqua flexati */
 div.countdown {
     flex-grow: 1;
-    backdrop-filter: blur(10px);
-    background-color: rgba(255, 255, 255, 0.609);
+    background-color: rgba(255, 255, 255, 0.392);
+    backdrop-filter: blur(15px);
     width: 4rem;
     box-shadow: 2px 4px 10px rgba(160, 160, 160, 0.564);
     /* Larghezza fissa */
@@ -175,32 +190,44 @@ div.countdown {
     /*centrato gli svg interni in verticale*/
     border-radius: 0.8rem;
     /* Leggermente arrotondato ma quadrato */
-    border: 2px solid white;
     cursor: pointer;
     transition: transform 0.2s, background-color 0.2s;
 }
 
 /* testi countdowns */
 p.countdown-giorni {
+    font-family: "Dancing Script", cursive;
+    color: #2d4a22af;
+    /* Verde bosco scuro */
+    font-weight: 1000;
+    /* Un'ombra leggerissima per farlo "staccare" dal vetro */
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8);
     margin: 0 0 8px 0;
-    padding: 0.2rem 0.5rem;
     font-size: 1rem;
-    color: #333;
     justify-content: center;
     align-items: center;
+    padding: 0 0.5rem;
 }
 
+/* TITOLO NATALE O PASQUA */
 p.countdown-titolo {
-    padding: 0.2rem 0.5rem;
-    font-size: 1rem;
-    font-weight: bold;
+
+    font-family: "Amatic SC", cursive;
+    color: #2d4a22af;
+    /* Verde bosco scuro */
+    font-weight: 1000;
+    /* Un'ombra leggerissima per farlo "staccare" dal vetro */
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8);
+    padding: 0 0.5rem;
+    font-size: 2.5rem;
+
     margin: 8px 0 0 0;
 }
 
 
-/* SEZIONE PIANTE E SANTI */
+/* SEZIONE PIANTE*/
 
-section.piante-e-santi {
+section.piante {
     box-shadow: 2px 4px 10px rgba(103, 103, 103, 0.576);
     background-color: rgba(255, 255, 255, 0.351);
     padding: 0 2vw;
@@ -222,7 +249,7 @@ section.piante-e-santi {
 }
 
 /* Controlla entrambi i pannelli piante e santi */
-div.pannello {
+div.pannello-piante {
     height: auto;
     padding: 1rem 0;
     /* background-color: rgba(255, 255, 255, 0.351); */
@@ -235,28 +262,59 @@ div.pannello {
     padding: 1rem 0;
     margin-bottom: 0;
     /* Rimuoviamo il margin che sballa i calcoli */
+
 }
 
-/* div sia piante sia santi che contiene l'immagine corrispondente */
+/* div  piante che contiene l'immagine corrispondente */
 div.pannello-img-container {
+    /* LA CHIAVE: Deve essere visible per non tagliare l'immagine */
+    overflow: visible;
+    /*per far strabordare l'immagine*/
+    position: relative;
+    /*posizione relativa per ancorare l'immagine sua figlia*/
     height: 200px;
+    width: auto;
     display: flex;
     flex-shrink: 0;
-    overflow: hidden;
     justify-content: center;
     align-items: center;
     padding: 1rem 1rem;
-    border-radius: 0.8rem;
-    background-color: rgba(255, 255, 255, 0.511);
-    box-shadow: 2px 4px 10px rgba(103, 103, 103, 0.576);
+    margin-top: 4rem;
+    /*spazio tra titolo pianta e immagine*/
+
 }
 
-img.piante-e-santi-img {
-    position: center;
-    height: 100%;
-    width: 100%;
-    object-position: center;
+/* 2. L'IMMAGINE: La facciamo strabordare con intelligenza */
+img.piante-img {
+    position: absolute;
+    /* La rendiamo più grande del contenitore (200px) */
+    height: 140%;
+    /* Esce sopra e sotto */
+    width: auto;
+    /* Mantiene le proporzioni */
+
     object-fit: contain;
+    /* Fondamentale per non deformarla */
+
+    /* La alziamo leggermente per farla "uscire" di più in alto */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    /* Il -60% la spinge più verso l'alto */
+
+    /* Ombra che segue i petali, tipico stile 3D Warrior */
+    filter: brightness(1.05) drop-shadow(4px 4px 2px rgba(0, 0, 0, 0.4)) drop-shadow(15px 25px 20px rgba(0, 0, 0, 0.25));
+
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    cursor: pointer;
+
+    z-index: 10;
+}
+
+/* Effetto al passaggio del mouse: la pianta si "alza" ulteriormente */
+div.pannello-piante:hover img.piante-img {
+    transform: translate(-50%, -65%) scale(1.1);
+    filter: brightness(1.1) drop-shadow(8px 8px 4px rgba(0, 0, 0, 0.3)) drop-shadow(25px 45px 35px rgba(0, 0, 0, 0.2));
 }
 
 .pannello-titolo,
@@ -280,17 +338,34 @@ img.piante-e-santi-img {
     justify-content: center;
 }
 
+/* titolo pianta del giorno */
 .pannello-titolo {
-    padding: 0.8rem;
+    font-family: 'Dancing script', cursive;
+    font-size: 2.5rem;
+    /* Amatic va tenuto grande perché è molto sottile */
+    font-weight: 400;
+    letter-spacing: 3px;
+    /* Dagli aria! Lo rende molto più elegante */
+    color: #2d4a22af;
+    /* Verde bosco scuro */
+
+    /* Un'ombra leggerissima per farlo "staccare" dal vetro */
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8);
+
+    background: none;
+    box-shadow: none;
+    margin-top: 0;
+    margin-bottom: 0;
     min-height: 4.5rem;
     /* Se un titolo va su due righe, l'altro resta allineato */
-    background-color: rgba(255, 255, 255, 0.668);
-    box-shadow: 2px 4px 10px rgba(103, 103, 103, 0.576);
 }
 
 .pannello-motto {
-    font-size: 1rem;
-    font-family: "Inter", sans-serif;
+    display: flex;
+    /* Un leggero bagliore */
+    background-color: rgba(255, 255, 255, 0.6);
+    font-size: 1.2rem;
+    font-family: "Lora", serif;
     text-shadow: none;
     color: #333;
     min-height: 5rem;
@@ -298,10 +373,20 @@ img.piante-e-santi-img {
     flex-grow: 1;
     /* Fa sì che il motto occupi tutto lo spazio rimanente in basso */
     margin: 0;
+    /* Creiamo i punti con un gradiente */
+
+}
+
+.text-motto {
+    border-radius: 1rem;
+    background-color: white;
+    padding: 8px 8px;
+    border: dotted 2px rgb(181 152 195)
 }
 
 /* BOX NOTE E SPESE USA IL FLEX SUI SUOI FIGLI SECTION SPESE E SECTION NOTE*/
 section.footer-spese-e-note {
+    position: relative;
     box-shadow: 2px 4px 10px rgba(103, 103, 103, 0.576);
     background-color: rgba(255, 255, 255, 0.351);
     width: 90vw;
@@ -462,7 +547,6 @@ p#note-input:focus {
 
     height: auto;
     /* Si espande solo quando scrivi */
-    min-height: 65px;
     max-height: 200px;
     /* Limite per non coprire tutto */
     overflow-y: auto;
@@ -473,4 +557,144 @@ p#note-input:focus {
 p#note-input:empty::before {
     content: "Scrivi qui la tua nota...";
     color: rgb(181, 181, 181);
+}
+
+
+/* Il contenitore dell'archivio (inizialmente nascosto) */
+#archivio-diario {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 85vw;
+    max-height: 70vh;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(25px);
+    border: 2px solid white;
+    border-radius: 2rem;
+    z-index: 1000;
+    padding: 2rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    display: none;
+    /* Nascosto di default */
+    flex-direction: column;
+    gap: 1.5rem;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+}
+
+#archivio-diario.active {
+    display: flex;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Ogni singolo ricordo */
+.ricordo-item {
+    background: rgba(255, 255, 255, 0.6);
+    padding: 1.2rem;
+    border-radius: 1rem;
+    border-left: 5px solid #ffd700;
+    /* Un tocco dorato per la "pulsazione" */
+}
+
+.ricordo-data {
+    font-weight: bold;
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.ricordo-testo {
+    font-family: "Lora", serif;
+    font-style: italic;
+    color: #333;
+}
+
+
+
+/* 1. L'overlay che copre tutto e intercetta il clic per uscire */
+#archivio-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.2);
+    /* Scurisce leggermente lo sfondo */
+    backdrop-filter: blur(10px);
+    z-index: 999;
+    display: none;
+    /* Gestito via JS */
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+#archivio-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+/* 2. Il box dei ricordi al centro */
+#archivio-diario {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    width: 85vw;
+    max-height: 70vh;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 2rem;
+    z-index: 1000;
+    padding: 2rem;
+    overflow-y: auto;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+
+    /* Stato iniziale nascosto per l'animazione */
+    visibility: hidden;
+    opacity: 0;
+    display: flex;
+    /* Usiamo flex per gestire il contenuto interno */
+    flex-direction: column;
+    gap: 1.5rem;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+#archivio-diario.active {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+
+
+/* 2. La pianta si "attacca" al footer e non si muove da lì */
+div#pianta-giorno-dopo {
+    position: absolute;
+    /* Si muove INSIEME al footer, non con lo schermo */
+    bottom: -50px;
+    /* Allineata al bordo basso del box note */
+    right: -40px;
+    /* Esce un po' a destra per l'effetto tagliato */
+    height: 300px;
+    /* La tua altezza desiderata */
+    width: 50vw;
+    z-index: -1;
+    /* Fondamentale: sta DIETRO al testo delle note */
+    pointer-events: none;
+    /* Non intralcia i click */
+    display: flex;
+
+}
+
+img#giorno-dopo {
+
+    opacity: 60%;
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    /* Opzionale: la rende un po' più integrata nello sfondo */
+    mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0));
 }
