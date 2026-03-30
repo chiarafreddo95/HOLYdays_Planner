@@ -308,7 +308,7 @@ img.piante-img {
 img.piante-img.ingrandita {
     transform: translate(-50%, -65%) scale(1.1);
     /* Posizione "alta" */
-    filter: brightness(1.1) drop-shadow(8px 8px 4px rgba(0, 0, 0, 0.3)) drop-shadow(25px 45px 35px rgba(0, 0, 0, 0.2));
+    filter: brightness(1.05) drop-shadow(8px 8px 4px rgba(0, 0, 0, 0.3)) drop-shadow(25px 45px 35px rgba(0, 0, 0, 0.2));
 }
 
 .pannello-titolo,
