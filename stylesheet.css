@@ -136,6 +136,7 @@ p.titolo-rovescia {
 
     font-family: 'Dancing script', cursive;
     font-size: 2.5rem;
+    line-height: 0.8;
     /* Amatic va tenuto grande perché è molto sottile */
     font-weight: 400;
     letter-spacing: 3px;
@@ -285,35 +286,28 @@ div.pannello-img-container {
 }
 
 /* 2. L'IMMAGINE: La facciamo strabordare con intelligenza */
+/* Assicurati che l'immagine originale abbia la transizione */
 img.piante-img {
     position: absolute;
-    /* La rendiamo più grande del contenitore (200px) */
     height: 140%;
-    /* Esce sopra e sotto */
     width: auto;
-    /* Mantiene le proporzioni */
-
     object-fit: contain;
-    /* Fondamentale per non deformarla */
-
-    /* La alziamo leggermente per farla "uscire" di più in alto */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -60%);
-    /* Il -60% la spinge più verso l'alto */
-
-    /* Ombra che segue i petali, tipico stile 3D Warrior */
-    filter: brightness(1.05) drop-shadow(4px 4px 2px rgba(0, 0, 0, 0.4)) drop-shadow(15px 25px 20px rgba(0, 0, 0, 0.25));
-
+    /* Posizione base */
     transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
     cursor: pointer;
-
     z-index: 10;
+
+    /* TRUCCO MAGIC: fa sì che il click venga sentito solo dove c'è il colore, non sul vuoto */
+    pointer-events: auto;
 }
 
-/* Effetto al passaggio del mouse: la pianta si "alza" ulteriormente */
-div.pannello-piante:hover img.piante-img {
+/* Nuova classe per la pianta ingrandita */
+img.piante-img.ingrandita {
     transform: translate(-50%, -65%) scale(1.1);
+    /* Posizione "alta" */
     filter: brightness(1.1) drop-shadow(8px 8px 4px rgba(0, 0, 0, 0.3)) drop-shadow(25px 45px 35px rgba(0, 0, 0, 0.2));
 }
 
@@ -360,28 +354,79 @@ div.pannello-piante:hover img.piante-img {
     /* Se un titolo va su due righe, l'altro resta allineato */
 }
 
+/* Il contenitore che si espande */
 .pannello-motto {
     display: flex;
-    /* Un leggero bagliore */
-    background-color: rgba(255, 255, 255, 0.6);
-    font-size: 1.2rem;
-    font-family: "Lora", serif;
-    text-shadow: none;
-    color: #333;
-    min-height: 5rem;
-    /* Spazio sufficiente per motti bilingue più lunghi */
-    flex-grow: 1;
-    /* Fa sì che il motto occupi tutto lo spazio rimanente in basso */
-    margin: 0;
-    /* Creiamo i punti con un gradiente */
+    flex-direction: column;
+    align-items: center;
 
+    /* MODIFICA: Aumentiamo il padding superiore per dare respiro al bordo */
+    padding-top: 15px;
+    padding-bottom: 5px;
+
+    /* MODIFICA: Invece di una max-height fissa che rischia di tagliare, 
+       usiamo un valore leggermente più alto per lo stato chiuso */
+    max-height: 7.5rem;
+
+    overflow: hidden;
+    transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    width: 100%;
 }
 
+p.titolo-motto {
+    margin: 0;
+}
+
+/* Quando è aperto, si allunga */
+.pannello-motto.aperto {
+    max-height: 400px;
+}
+
+/* IL TUO STILE ORIGINALE: non cambia mai */
 .text-motto {
+    /* Mantieni il tuo stile */
     border-radius: 1rem;
     background-color: white;
-    padding: 8px 8px;
-    border: dotted 2px rgb(181 152 195)
+    padding: 8px 15px;
+    border: dotted 2px rgb(181 152 195);
+
+    /* AGGIUNTA: Questo assicura che il bordo non venga 
+       "mangiato" dai calcoli del box-sizing */
+    margin-top: 2px;
+
+    display: inline-block;
+}
+
+/* La descrizione che appare SOTTO il riquadro a pallini */
+.descrizione-pianta {
+    /* Stato CHIUSO: non occupa spazio */
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    padding: 0 20px;
+    /* Padding laterale sì, ma verticale zero */
+    margin: 0;
+
+    /* Transizione fluida su tutto */
+    transition: max-height 0.5s ease-out, opacity 0.4s ease, padding 0.5s ease;
+
+    font-family: "Lora", serif;
+    font-size: 1rem;
+    color: #444;
+    width: 100%;
+}
+
+/* Stato APERTO: si espande e occupa spazio */
+.pannello-motto.aperto .descrizione-pianta {
+    max-height: 300px;
+    /* Un valore sufficiente per il testo */
+    opacity: 1;
+    padding-top: 15px;
+    /* Qui riprende il suo spazio verticale */
+    padding-bottom: 15px;
+    overflow-y: auto;
+    /* Attiva lo scroll se il testo esce dai 300px */
 }
 
 /* BOX NOTE E SPESE USA IL FLEX SUI SUOI FIGLI SECTION SPESE E SECTION NOTE*/

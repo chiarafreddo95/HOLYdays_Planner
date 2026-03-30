@@ -84,3 +84,39 @@ document.getElementById('archivio-overlay').addEventListener('click', () => {
     o.classList.remove('active'); d.classList.remove('active');
     setTimeout(() => o.style.display = 'none', 400);
 });
+
+// CASSETTO MOTTO
+
+const audioMotto = new Audio('suoni/freesound_community-light-switch-82388.mp3');
+audioMotto.volume = 0.4;
+
+function toggleCassetto(elemento) {
+    // Suono al click (opzionale, ma consigliato per coerenza)
+    audioMotto.currentTime = 0.2;
+    audioMotto.play();
+
+    // Accende/Spegne la classe "aperto"
+    elemento.classList.toggle('aperto');
+}
+
+
+
+
+
+
+
+
+
+
+
+// Carica il file (assicurati che il percorso sia corretto, es: 'suoni/click.mp3')
+const audioPianta = new Audio('suoni/489862__lordfrodo10__235-hojas2.wav');
+
+function togglePianta(elemento) {
+    // Reset e Play: suona SEMPRE al click
+    audioPianta.currentTime = 0;
+    audioPianta.play();
+
+    // Cambia lo stato visivo (ingrandisce/rimpicciolisce)
+    elemento.classList.toggle('ingrandita');
+}
