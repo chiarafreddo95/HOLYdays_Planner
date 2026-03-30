@@ -177,9 +177,10 @@ section.countdowns {
 
 /* riquadri natale e pasqua flexati */
 div.countdown {
+    background: rgba(255, 255, 255, 0.4);
+    /* Effetto vetro */
+    backdrop-filter: blur(10px);
     flex-grow: 1;
-    background-color: rgba(255, 255, 255, 0.392);
-    backdrop-filter: blur(15px);
     width: 4rem;
     box-shadow: 2px 4px 10px rgba(160, 160, 160, 0.564);
     /* Larghezza fissa */
@@ -229,8 +230,11 @@ p.countdown-titolo {
 /* SEZIONE PIANTE*/
 
 section.piante {
+    background: rgba(255, 255, 255, 0.4);
+    /* Effetto vetro */
+    backdrop-filter: blur(10px);
     box-shadow: 2px 4px 10px rgba(103, 103, 103, 0.576);
-    background-color: rgba(255, 255, 255, 0.351);
+
     padding: 0 2vw;
     flex-grow: 0;
     /* Non forziamo più la crescita per riempire lo schermo */
@@ -296,19 +300,30 @@ img.piante-img {
     left: 50%;
     transform: translate(-50%, -60%);
     /* Posizione base */
-    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+
     cursor: pointer;
     z-index: 10;
 
     /* TRUCCO MAGIC: fa sì che il click venga sentito solo dove c'è il colore, non sul vuoto */
     pointer-events: auto;
+
+    /* Ombra iniziale: molto vicina alla pianta, quasi un contorno */
+    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.2));
+
+    /* Fondamentale per vedere l'ombra muoversi fluidamente */
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+        filter 0.6s ease;
 }
 
 /* Nuova classe per la pianta ingrandita */
 img.piante-img.ingrandita {
     transform: translate(-50%, -65%) scale(1.1);
     /* Posizione "alta" */
-    filter: brightness(1.05) drop-shadow(8px 8px 4px rgba(0, 0, 0, 0.3)) drop-shadow(25px 45px 35px rgba(0, 0, 0, 0.2));
+
+    /* L'ombra diventa doppia: 
+       1. Una più scura e vicina per mantenere il dettaglio.
+       2. Una molto larga e trasparente per simulare l'altezza (profondità). */
+    filter: brightness(1.05) drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.3)) drop-shadow(20px 40px 30px rgba(0, 0, 0, 0.15));
 }
 
 .pannello-titolo,
@@ -429,11 +444,105 @@ p.titolo-motto {
     /* Attiva lo scroll se il testo esce dai 300px */
 }
 
+
+/* Il contenitore principale del Santo PANNELLO SANTO*/
+.pannello-santo {
+    box-shadow: 2px 4px 10px rgba(103, 103, 103, 0.576);
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.4);
+    /* Effetto vetro */
+    backdrop-filter: blur(10px);
+    border: 2px solid #ffffff;
+    /* Stesso stile del motto */
+    border-radius: 15px;
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    /* max-width: 600px; */
+    transition: all 0.3s ease;
+}
+
+
+/* L'etichetta cliccabile (Oggi si festeggia...) */
+.etichetta-santo {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    color: #333;
+    text-align: center;
+}
+
+/* Il contenuto nascosto (Immagine + Descrizione) */
+.descrizione-santo {
+    max-height: 0;
+    /* Chiuso di default */
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.6s ease-out, opacity 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 15px;
+}
+
+/* Quando il cassetto è aperto (grazie alla classe 'aperto' di JS) */
+.pannello-santo.aperto .descrizione-santo {
+    max-height: 500px;
+    /* Spazio sufficiente per foto e testo */
+    opacity: 1;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    overflow-y: auto;
+    /* Attiva lo scorrimento verticale se il testo è lungo */
+    overflow-x: hidden;
+    /* Evita fastidiosi scorrimenti laterali */
+}
+
+/* Stile dell'immagine del Santo */
+.img-santo {
+    width: 100%;
+    max-width: 600px;
+    height: 100%;
+    object-fit: cover;
+    /* border-radius: 50%; */
+    /* Immagine circolare */
+
+    margin-bottom: 15px;
+
+    filter: sepia(30%);
+    /* Un tocco vintage che sta benissimo col verde */
+}
+
+/* Testo della descrizione del Santo */
+.descrizione-santo p {
+    max-width: 600px;
+    font-family: 'Lora', serif;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #444;
+    text-align: center;
+    margin: 0;
+}
+
+.accent-santo {
+    line-height: 1;
+    color: #2d4a22af;
+    /* Verde bosco scuro */
+    font-weight: 800;
+
+    /* Un'ombra leggerissima per farlo "staccare" dal vetro */
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8);
+    font-size: 1.5rem;
+}
+
+
 /* BOX NOTE E SPESE USA IL FLEX SUI SUOI FIGLI SECTION SPESE E SECTION NOTE*/
 section.footer-spese-e-note {
+    background: rgba(255, 255, 255, 0.4);
+    /* Effetto vetro */
+    backdrop-filter: blur(10px);
     position: relative;
     box-shadow: 2px 4px 10px rgba(103, 103, 103, 0.576);
-    background-color: rgba(255, 255, 255, 0.351);
+
     width: 90vw;
     height: auto;
 
