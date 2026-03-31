@@ -219,7 +219,7 @@ p.countdown-titolo {
     /* Verde bosco scuro */
     font-weight: 1000;
     /* Un'ombra leggerissima per farlo "staccare" dal vetro */
-    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8);
+    text-shadow: 2px 1px 1px rgb(255 255 255);
     padding: 0 0.5rem;
     font-size: 2.5rem;
 
@@ -359,7 +359,8 @@ img.piante-img.ingrandita {
     /* Verde bosco scuro */
 
     /* Un'ombra leggerissima per farlo "staccare" dal vetro */
-    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8);
+    text-shadow: 1px 2px 1px rgb(255 255 255);
+
 
     background: none;
     box-shadow: none;
@@ -413,10 +414,22 @@ p.titolo-motto {
     display: inline-block;
 }
 
+
+div.intro-pianta p {
+    color: #642857;
+    margin-top: 1rem;
+    font-family: "Dancing Script";
+    text-shadow: 2px 2px 2px #ffffff, 2px 2px 4px #ffffff, 2px 2px 6px #ffffff;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.1;
+}
+
 /* La descrizione che appare SOTTO il riquadro a pallini */
 .descrizione-pianta {
     /* Stato CHIUSO: non occupa spazio */
     max-height: 0;
+    max-width: 600px;
     overflow: hidden;
     opacity: 0;
     padding: 0 20px;
@@ -427,10 +440,26 @@ p.titolo-motto {
     transition: max-height 0.5s ease-out, opacity 0.4s ease, padding 0.5s ease;
 
     font-family: "Lora", serif;
+
     font-size: 1rem;
     color: #444;
     width: 100%;
 }
+
+/* motto FINALE descrizione santi e piante */
+
+div.accent-descrizioni p {
+    background-color: #ffffff7b;
+    margin: 0;
+    padding: 8px 16px;
+    border: dotted 2px rgb(181 152 195);
+    border-radius: 1rem;
+    font-weight: 1000;
+}
+
+
+
+
 
 /* Stato APERTO: si espande e occupa spazio */
 .pannello-motto.aperto .descrizione-pianta {
@@ -460,12 +489,14 @@ p.titolo-motto {
     width: 100%;
     /* max-width: 600px; */
     transition: all 0.3s ease;
+    font-family: 'Lora', serif;
+    font-style: italic;
 }
 
 
 /* L'etichetta cliccabile (Oggi si festeggia...) */
 .etichetta-santo {
-    font-family: 'Lora', serif;
+
     font-size: 1rem;
     color: #333;
     text-align: center;
@@ -506,14 +537,16 @@ p.titolo-motto {
     /* border-radius: 50%; */
     /* Immagine circolare */
 
-    margin-bottom: 15px;
+    margin-bottom: 30px;
+    margin-top: 5px;
 
     filter: sepia(30%);
     /* Un tocco vintage che sta benissimo col verde */
 }
 
 /* Testo della descrizione del Santo */
-.descrizione-santo p {
+.descrizione-santo p,
+.descrizione-pianta p {
     max-width: 600px;
     font-family: 'Lora', serif;
     font-size: 0.95rem;
@@ -523,7 +556,10 @@ p.titolo-motto {
     margin: 0;
 }
 
-.accent-santo {
+
+
+/* TITOLI INTERNI DESCRIZIONE */
+.accent-fiori-e-santi {
     line-height: 1;
     color: #2d4a22af;
     /* Verde bosco scuro */
